@@ -15,6 +15,16 @@ jQuery.fn.mathquill = function(cmd, latex) {
       if (cursor)
         cursor.show();
     });
+  case "onText":
+    return this.each(function() {
+      var blockId = $(this).attr(mqBlockId),
+        block = blockId && MathElement[blockId],
+        cursor = block && block.cursor;
+        
+      if (cursor)
+        cursor.parent.bubble( cmd, latex, {preventDefault: function(){}}, block.blurred && cursor.hide().parent.blur());
+        
+    });
   case 'redraw':
     return this.each(function() {
       var blockId = $(this).attr(mqBlockId),
