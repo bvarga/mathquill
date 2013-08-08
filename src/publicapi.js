@@ -6,6 +6,15 @@
 //called) on jQuery-wrapped HTML DOM elements.
 jQuery.fn.mathquill = function(cmd, latex) {
   switch (cmd) {
+  case 'showcursor':
+    return this.each(function(){
+      var blockId = $(this).attr(mqBlockId),
+        block = blockId && MathElement[blockId],
+        cursor = block && block.cursor;
+
+      if (cursor)
+        cursor.show();
+    });
   case 'redraw':
     return this.each(function() {
       var blockId = $(this).attr(mqBlockId),
